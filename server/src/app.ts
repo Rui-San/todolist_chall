@@ -33,7 +33,7 @@ class App {
 	}
 
 	private startRoutes() { 
-		//this.app.use('/', routes);
+		this.app.use('/', routes);
 	}
 
 }

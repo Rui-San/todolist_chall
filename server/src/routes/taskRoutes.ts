@@ -16,4 +16,18 @@ router.post(
 	}
 )
 
+router.get(
+	"/:bid",
+	(req, res) => {
+		taskController.getTaskByBid(req, res)
+	}
+)
+
+router.get(
+	"/",
+	(req, res) => {
+		taskController.getAllTasks(req, res)
+	}
+)
+
 export default router;

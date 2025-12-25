@@ -26,4 +26,29 @@ export class TaskController {
 		}
 	}
 
+	/**
+	 * Gets a Task by its bid
+	 * @param req the request object containing the bid parameter
+	 * @param res the response object
+	 * @returns The TaskDto as json response
+	 */
+	public async getTaskByBid(req: Request<{ bid: string }>, res: Response){
+		try{
+			const bid = req.params.bid;
+			const task =  await this.taskService.getTaskByBid(bid);
+			return res.status(200).json(task);
+		}catch(err){
+			return res.status(500).json({ message: 'Internal Server Error: ' + err });
+		}
+	}
+
+	public async getAllTasks(req: Request, res: Response){
+		try{
+			const tasks = await this.taskService.getAllTasks();
+			return res.status(200).json(tasks);
+		}catch(err){
+			return res.status(500).json({ message: 'Internal Server Error: ' + err });
+		}
+	}
+
 }

@@ -19,8 +19,9 @@ export class TaskService {
 	 */
 	public async createTask(newTask : TaskDto) {
 		try{
-			const task = new Task(
-				newTask.title, 
+			const task = new Task(	
+				newTask.title,
+				newTask.bid,
 				newTask.completed ?? false
 			); // Ideally this would be done with a factory
 			const createdTask = await this.taskRepository.saveTask(task);

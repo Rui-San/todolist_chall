@@ -42,10 +42,31 @@ export class TaskController {
 		}
 	}
 
+	/**
+	 * Gets all Tasks in the system
+	 * @param req the request object 
+	 * @param res the response object
+	 * @returns An array of TaskDto as json response
+	 */
 	public async getAllTasks(req: Request, res: Response){
 		try{
 			const tasks = await this.taskService.getAllTasks();
 			return res.status(200).json(tasks);
+		}catch(err){
+			return res.status(500).json({ message: 'Internal Server Error: ' + err });
+		}
+	}
+
+	/**
+	 * Sets a Task as completed by its bid (PATCH)
+	 * @param req the request object containing the bid parameter
+	 * @param res the response object
+	 */
+	public async setTaskAsCompleted(req: Request<{ bid: string }>, res: Response){
+		try{
+			const bid = req.params.bid;
+			await this.taskService.setTaskAsCompleted(bid);
+			return res.status(200).json({ message: 'Task marked as completed' });
 		}catch(err){
 			return res.status(500).json({ message: 'Internal Server Error: ' + err });
 		}

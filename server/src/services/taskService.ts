@@ -58,4 +58,21 @@ export class TaskService {
 		}
 	}
 
+	/**
+	 * Sets a Task as completed by its bid
+	 * @param bid The bid of the Task to set as completed
+	 * @returns The updated TaskDto
+	 */
+	public async setTaskAsCompleted(bid: string){
+		try{
+			const task = await this.taskRepository.getTaskByBid(bid);
+			task.Complete();
+			console.log("Task after completion:", task); // Debug log to verify task state
+			const updatedTask = await this.taskRepository.updateTask(task);
+			return TaskMapper.toDto(updatedTask);
+		}catch(err){
+			throw new Error("Error setting task as completed: " + err);
+		}
+	}
+
 }

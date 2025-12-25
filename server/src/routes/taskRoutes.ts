@@ -30,4 +30,11 @@ router.get(
 	}
 )
 
+router.patch(
+	"/:bid",
+	(req, res) => {
+		taskController.setTaskAsCompleted(req, res)
+	}
+)
+
 export default router;

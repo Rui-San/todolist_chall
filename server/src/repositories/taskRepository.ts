@@ -23,7 +23,6 @@ export class TaskRepository {
 	 * @returns The Task with the given bid
 	 */
 	public async getTaskByBid(bid: string) : Promise<Task> {
-		console.log("Searching for task with bid (repo):", bid); // Debug log to verify bid
 		const taskDoc = await TaskModel.findOne({ _bid: bid }).exec();
 		if(!taskDoc)
 			throw new Error("Task not found with bid " + bid);
@@ -37,6 +36,24 @@ export class TaskRepository {
 	public async getAllTasks() : Promise<Task[]> {
 		const taskDocs = await TaskModel.find().exec();
 		return taskDocs.map(doc => TaskMapper.fromSchema(doc));
+	}
+
+	/**
+	 * Updates an existing Task in the database
+	 * Can be used by both PUT and PATCH operations
+	 * In this case we'll only implement PATCH
+	 * @param task The Task to update
+	 * @returns The updated Task
+	 */
+	public async updateTask(task: Task) : Promise<Task> {
+		const updatedDoc = await TaskModel.findOneAndUpdate(
+			{ _bid: task.bid },
+			TaskMapper.toSchema(task),
+			{ new: true }
+		).exec();
+		if(!updatedDoc)
+			throw new Error("Task not found with bid " + task.bid);
+		return TaskMapper.fromSchema(updatedDoc);
 	}
 	
 }

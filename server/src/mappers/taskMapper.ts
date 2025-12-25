@@ -21,9 +21,9 @@ export class TaskMapper {
 
 	static toSchema(task: Task) : any {
 		return {
-			bid: task.bid,
-			title: task.title,
-			completed: task.completed
+			_bid: task.bid,
+			_title: task.title,
+			_completed: task.completed
 		};
 	}
 

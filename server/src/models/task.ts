@@ -33,6 +33,8 @@ export default class Task {
 	}
 
 	public Complete() {
+		if(this.completed)
+			throw new Error("Task is already completed");
 		this.completed = true;
 	}
 

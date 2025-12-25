@@ -37,4 +37,11 @@ router.patch(
 	}
 )
 
+router.delete(
+	"/:bid",
+	(req, res) => {
+		taskController.deleteTask(req, res)
+	}
+)
+
 export default router;

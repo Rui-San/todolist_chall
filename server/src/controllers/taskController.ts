@@ -72,4 +72,14 @@ export class TaskController {
 		}
 	}
 
+	public async deleteTask(req: Request<{ bid: string }>, res: Response){
+		try{
+			const bid = req.params.bid;
+			await this.taskService.deleteTask(bid);
+			return res.status(200).json({ message: 'Task deleted successfully' });
+		}catch(err){
+			return res.status(500).json({ message: 'Internal Server Error: ' + err });
+		}
+	}
+
 }

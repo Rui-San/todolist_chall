@@ -55,5 +55,11 @@ export class TaskRepository {
 			throw new Error("Task not found with bid " + task.bid);
 		return TaskMapper.fromSchema(updatedDoc);
 	}
+
+	public async deleteTask(bid: string) : Promise<void> {
+		const delResult = await TaskModel.deleteOne({ _bid: bid }).exec();
+		if(delResult.deletedCount === 0)
+			throw new Error("Could not delete task with bid " + bid + " because it does not exist");
+	}
 	
 }

@@ -75,4 +75,12 @@ export class TaskService {
 		}
 	}
 
+	public async deleteTask(bid: string){
+		try{
+			await this.taskRepository.deleteTask(bid);
+		}catch(err){
+			throw new Error("Error deleting task: " + err);
+		}
+	}
+
 }

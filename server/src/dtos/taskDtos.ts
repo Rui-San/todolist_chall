@@ -3,3 +3,7 @@ export interface TaskDto {
 	title: string;
 	completed?: boolean;
 }
+
+export interface CreateTaskDto {
+	title: string;
+}

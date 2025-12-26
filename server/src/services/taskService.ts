@@ -1,4 +1,4 @@
-import type { TaskDto } from "../dtos/taskDtos";
+import type { CreateTaskDto, TaskDto } from "../dtos/taskDtos";
 import { TaskMapper } from "../mappers/taskMapper";
 import Task from "../models/task";
 import type { TaskRepository } from "../repositories/taskRepository.ts";
@@ -17,12 +17,10 @@ export class TaskService {
 	 * @param newTask The new task data to save
 	 * @returns The created Task as a Dto
 	 */
-	public async createTask(newTask : TaskDto) {
+	public async createTask(newTask : CreateTaskDto) {
 		try{
 			const task = new Task(	
-				newTask.title,
-				newTask.bid,
-				newTask.completed ?? false
+				newTask.title
 			); // Ideally this would be done with a factory
 			const createdTask = await this.taskRepository.saveTask(task);
 			return TaskMapper.toDto(createdTask);

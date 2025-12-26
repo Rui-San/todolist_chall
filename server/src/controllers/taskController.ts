@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import type { TaskDto } from "../dtos/taskDtos";
+import type { CreateTaskDto, TaskDto } from "../dtos/taskDtos";
 import type { TaskService } from "../services/taskService";
 
 export class TaskController {
@@ -16,9 +16,9 @@ export class TaskController {
 	 * @param res the response object
 	 * @returns The created Task as json response
 	 */
-	public async createTask(req: Request<{}, {}, TaskDto>, res: Response) {
+	public async createTask(req: Request<{}, {}, CreateTaskDto>, res: Response) {
 		try{
-			const newTask : TaskDto = req.body;
+			const newTask : CreateTaskDto = req.body;
 			const createdTask = await this.taskService.createTask(newTask);
 			return res.status(201).json(createdTask);
 		}catch(err){ // Generic error handling, could be improved with custom error classes

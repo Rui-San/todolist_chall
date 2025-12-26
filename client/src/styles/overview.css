@@ -1,0 +1,9 @@
+.overview-wrapper{
+	display: flex;
+	flex-direction: nowrap;
+	gap: 1rem;
+}
+
+.overview-card{
+	flex: 1;
+}

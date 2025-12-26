@@ -6,5 +6,4 @@ export interface TaskDto {
 
 export interface CreateTaskDto {
 	title : string;
-	completed?: boolean;
 }
